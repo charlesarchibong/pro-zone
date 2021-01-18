@@ -1,16 +1,11 @@
 # prozone_app
 
-Service provider management application
+ProZone is a provider aggregator company, that has a large network of healthcare providers (Gym, Spas, Optical Centres, Hospitals etc.) that they work with.
 
-## Getting Started
+They have provider officers that are responsible for signing up and managing these providers.
+Build a simple mobile application that will be used by a provider officer for managing providers that are currently in their network.
 
-This project is a starting point for a Flutter application.
+## Built by
+- [Charles Archibong](https://www.linkedin.com/in/charles-archibong)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
