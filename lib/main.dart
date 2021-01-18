@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:prozone_app/core/constants/colors_constant.dart';
 import 'package:prozone_app/core/constants/route_names.dart';
 import 'package:prozone_app/core/dependencies/injection_container.dart' as di;
 import 'package:prozone_app/core/routes/route_generator.dart';
+import 'package:prozone_app/features/provider/presentation/providers/service_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.initDi();
   await DotEnv.load(fileName: ".env");
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => di.sl<ServiceProvider>(),
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
