@@ -5,12 +5,11 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:get_it/get_it.dart';
 import 'package:prozone_app/core/network/http_requester.dart';
 import 'package:prozone_app/core/network/network_info.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initDi() async {
-  final sharePreferences = await SharedPreferences.getInstance();
+  // final sharePreferences = await SharedPreferences.getInstance();
 
   sl.registerLazySingleton(
     () => Connectivity(),
