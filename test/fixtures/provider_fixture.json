@@ -1,0 +1,8 @@
+{
+    "id": "123",
+    "name": "Charles Archibong",
+    "description": "I am a mobile developer",
+    "rating": 5,
+    "active_status": "Online",
+    "state" : {"id": "12","name": "Cross river"}
+}
