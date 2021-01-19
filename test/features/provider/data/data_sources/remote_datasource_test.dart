@@ -8,6 +8,7 @@ import 'package:prozone_app/core/network/http_requester.dart';
 import 'package:prozone_app/core/network/network_info.dart';
 import 'package:prozone_app/features/provider/data/data_sources/remote_datasource.dart';
 import 'package:prozone_app/features/provider/data/models/provider_model.dart';
+import 'package:prozone_app/features/provider/data/models/provider_type_model.dart';
 import 'package:prozone_app/features/provider/data/models/state_model.dart';
 
 import '../../../../fixtures/fixture.dart';
@@ -56,6 +57,38 @@ main() {
               json.decode(
                 fixture(
                   'provider_fixture',
+                ),
+              ),
+            )
+          ].toList());
+    });
+
+    test('should request list of provider types from server', () async {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(
+        mockHttpServerRequester.getRequest(
+          url: GET_PROVIDER_TYPE_ENDPOINT,
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: [
+            json.decode(
+              fixture(
+                'provider_type_fixture',
+              ),
+            ),
+          ].toList(),
+          statusCode: 200,
+        ),
+      );
+      final result = await remoteDataSourceImpl.getProviderTypes();
+      expect(
+          result,
+          [
+            ProviderTypeModel.fromMap(
+              json.decode(
+                fixture(
+                  'provider_type_fixture',
                 ),
               ),
             )
