@@ -19,7 +19,15 @@ class ImageModel extends ImageEntity {
     this.smallImage,
     this.mediumImage,
     this.thumbNail,
-  });
+  }) : super(
+          id: id,
+          mediumImage: mediumImage,
+          name: name,
+          smallImage: smallImage,
+          thumbNail: thumbNail,
+          alternativeText: alternativeText,
+          caption: caption,
+        );
 
   Map<String, dynamic> toMap() {
     return {
