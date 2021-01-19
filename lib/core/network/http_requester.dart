@@ -53,7 +53,7 @@ class HttpServiceRequester {
     return response;
   }
 
-  Future<dynamic> getRequest({
+  Future<Response> getRequest({
     @required String url,
     // Map queryParam,
   }) async {
@@ -78,7 +78,7 @@ class HttpServiceRequester {
     return response;
   }
 
-  Future<dynamic> delete({
+  Future<Response> delete({
     @required String url,
     Map headers,
     Map queryParam,
@@ -96,7 +96,7 @@ class HttpServiceRequester {
     return response;
   }
 
-  Future<dynamic> put({
+  Future<Response> put({
     @required String url,
     Map headers,
     @required Map data,

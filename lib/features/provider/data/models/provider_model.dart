@@ -77,3 +77,15 @@ class ProviderModel extends ProviderEntity {
         json.decode(source),
       );
 }
+
+class ProviderModelList {
+  final List<ProviderModel> list;
+
+  ProviderModelList({this.list});
+
+  factory ProviderModelList.fromJson(List parsedJson) {
+    List<ProviderModel> list =
+        parsedJson.map((i) => ProviderModel.fromMap(i)).toList();
+    return ProviderModelList(list: list);
+  }
+}
