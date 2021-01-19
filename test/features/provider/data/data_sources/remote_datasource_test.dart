@@ -8,6 +8,7 @@ import 'package:prozone_app/core/network/http_requester.dart';
 import 'package:prozone_app/core/network/network_info.dart';
 import 'package:prozone_app/features/provider/data/data_sources/remote_datasource.dart';
 import 'package:prozone_app/features/provider/data/models/provider_model.dart';
+import 'package:prozone_app/features/provider/data/models/state_model.dart';
 
 import '../../../../fixtures/fixture.dart';
 
@@ -28,35 +29,70 @@ main() {
     );
   });
 
-  test('should request list of providers from server', () async {
-    when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-    when(
-      mockHttpServerRequester.getRequest(
-        url: GET_PROVIDERS_ENDPOINT,
-      ),
-    ).thenAnswer(
-      (_) async => Response(
-        data: [
-          json.decode(
-            fixture(
-              'provider_fixture',
-            ),
-          ),
-        ].toList(),
-        statusCode: 200,
-      ),
-    );
-    final result = await remoteDataSourceImpl.getProviders();
-    expect(
-        result,
-        [
-          ProviderModel.fromMap(
+  group('providers', () {
+    test('should request list of providers from server', () async {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(
+        mockHttpServerRequester.getRequest(
+          url: GET_PROVIDERS_ENDPOINT,
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: [
             json.decode(
               fixture(
                 'provider_fixture',
               ),
             ),
-          )
-        ].toList());
+          ].toList(),
+          statusCode: 200,
+        ),
+      );
+      final result = await remoteDataSourceImpl.getProviders();
+      expect(
+          result,
+          [
+            ProviderModel.fromMap(
+              json.decode(
+                fixture(
+                  'provider_fixture',
+                ),
+              ),
+            )
+          ].toList());
+    });
+  });
+  group('states', () {
+    test('should request list of states from server', () async {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(
+        mockHttpServerRequester.getRequest(
+          url: GET_STATES_ENDPOINT,
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: [
+            json.decode(
+              fixture(
+                'state_fixture',
+              ),
+            ),
+          ].toList(),
+          statusCode: 200,
+        ),
+      );
+      final result = await remoteDataSourceImpl.getStates();
+      expect(
+          result,
+          [
+            StateModel.fromMap(
+              json.decode(
+                fixture(
+                  'state_fixture',
+                ),
+              ),
+            )
+          ].toList());
+    });
   });
 }

@@ -4,9 +4,11 @@ import 'package:prozone_app/core/errors/error.dart';
 import 'package:prozone_app/core/network/http_requester.dart';
 import 'package:prozone_app/core/network/network_info.dart';
 import 'package:prozone_app/features/provider/data/models/provider_model.dart';
+import 'package:prozone_app/features/provider/data/models/state_model.dart';
 
 abstract class RemoteDataSource {
   Future<List<ProviderModel>> getProviders();
+  Future<List<StateModel>> getStates();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -25,6 +27,18 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         url: GET_PROVIDERS_ENDPOINT,
       );
       return ProviderModelList.fromJson(response.data).list;
+    } else {
+      throw NoInternetException();
+    }
+  }
+
+  @override
+  Future<List<StateModel>> getStates() async {
+    if (await networkInfo.isConnected) {
+      final response = await httpServiceRequester.getRequest(
+        url: GET_STATES_ENDPOINT,
+      );
+      return StateModelList.fromJson(response.data).list;
     } else {
       throw NoInternetException();
     }
