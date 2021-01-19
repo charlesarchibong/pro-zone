@@ -11,6 +11,7 @@ abstract class RemoteDataSource {
   Future<List<ProviderModel>> getProviders();
   Future<List<StateModel>> getStates();
   Future<List<ProviderTypeModel>> getProviderTypes();
+  Future<ProviderModel> createProvider(ProviderModel providerModel);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -53,6 +54,20 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         url: GET_PROVIDER_TYPE_ENDPOINT,
       );
       return ProviderTypeModelList.fromJson(response.data).list;
+    } else {
+      throw NoInternetException();
+    }
+  }
+
+  @override
+  Future<ProviderModel> createProvider(ProviderModel providerModel) async {
+    if (await networkInfo.isConnected) {
+      final response = await httpServiceRequester.post(
+        url: GET_PROVIDERS_ENDPOINT,
+        contentType: 'application/json',
+        body: providerModel.toMap(),
+      );
+      return ProviderModel.fromMap(response.data);
     } else {
       throw NoInternetException();
     }

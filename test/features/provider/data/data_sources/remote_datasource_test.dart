@@ -17,6 +17,13 @@ class MockHttpServerRequester extends Mock implements HttpServiceRequester {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
+ProviderModel providerModel = ProviderModel.fromMap(
+  json.decode(
+    fixture(
+      'provider_fixture',
+    ),
+  ),
+);
 main() {
   MockHttpServerRequester mockHttpServerRequester;
   MockNetworkInfo mockNetworkInfo;
@@ -93,6 +100,36 @@ main() {
               ),
             )
           ].toList());
+    });
+
+    test('should add new provider to the server', () async {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(
+        mockHttpServerRequester.post(
+          url: GET_PROVIDERS_ENDPOINT,
+          contentType: 'application/json',
+          body: providerModel.toMap(),
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: json.decode(
+            fixture(
+              'provider_fixture',
+            ),
+          ),
+          statusCode: 200,
+        ),
+      );
+      final result = await remoteDataSourceImpl.createProvider(providerModel);
+      expect(
+          result,
+          ProviderModel.fromMap(
+            json.decode(
+              fixture(
+                'provider_fixture',
+              ),
+            ),
+          ));
     });
   });
   group('states', () {

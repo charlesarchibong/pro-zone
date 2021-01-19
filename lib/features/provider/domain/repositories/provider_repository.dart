@@ -8,4 +8,6 @@ abstract class ProviderRepository {
   Future<Either<Failure, List<ProviderEntity>>> getProviders();
   Future<Either<Failure, List<StateEntity>>> getStates();
   Future<Either<Failure, List<ProviderTypeEntity>>> getProviderTypes();
+  Future<Either<Failure, ProviderEntity>> createProvider(
+      ProviderEntity providerEntity);
 }

@@ -14,7 +14,6 @@ class HttpServiceRequester {
 
   Future<Response> post({
     @required String url,
-    String token,
     dynamic body,
     @required String contentType,
     Map queryParam,
