@@ -1,0 +1,77 @@
+{
+    "id": 1,
+    "name": "FVRH-Exterior-e1391182892802",
+    "alternativeText": null,
+    "caption": null,
+    "width": 1024,
+    "height": 646,
+    "formats": {
+        "large": {
+            "ext": ".jpeg",
+            "url": "https://res.cloudinary.com/maxii/image/upload/v1594183736/large_FVRH_Exterior_e1391182892802_325e660fdd.jpg",
+            "hash": "large_FVRH_Exterior_e1391182892802_325e660fdd",
+            "mime": "image/jpeg",
+            "path": null,
+            "size": 86.35,
+            "width": 1000,
+            "height": 631,
+            "provider_metadata": {
+                "public_id": "large_FVRH_Exterior_e1391182892802_325e660fdd",
+                "resource_type": "image"
+            }
+        },
+        "small": {
+            "ext": ".jpeg",
+            "url": "https://res.cloudinary.com/maxii/image/upload/v1594183736/small_FVRH_Exterior_e1391182892802_325e660fdd.jpg",
+            "hash": "small_FVRH_Exterior_e1391182892802_325e660fdd",
+            "mime": "image/jpeg",
+            "path": null,
+            "size": 25.99,
+            "width": 500,
+            "height": 315,
+            "provider_metadata": {
+                "public_id": "small_FVRH_Exterior_e1391182892802_325e660fdd",
+                "resource_type": "image"
+            }
+        },
+        "medium": {
+            "ext": ".jpeg",
+            "url": "https://res.cloudinary.com/maxii/image/upload/v1594183736/medium_FVRH_Exterior_e1391182892802_325e660fdd.jpg",
+            "hash": "medium_FVRH_Exterior_e1391182892802_325e660fdd",
+            "mime": "image/jpeg",
+            "path": null,
+            "size": 51.23,
+            "width": 750,
+            "height": 473,
+            "provider_metadata": {
+                "public_id": "medium_FVRH_Exterior_e1391182892802_325e660fdd",
+                "resource_type": "image"
+            }
+        },
+        "thumbnail": {
+            "ext": ".jpeg",
+            "url": "https://res.cloudinary.com/maxii/image/upload/v1594183735/thumbnail_FVRH_Exterior_e1391182892802_325e660fdd.jpg",
+            "hash": "thumbnail_FVRH_Exterior_e1391182892802_325e660fdd",
+            "mime": "image/jpeg",
+            "path": null,
+            "size": 8.59,
+            "width": 245,
+            "height": 155,
+            "provider_metadata": {
+                "public_id": "thumbnail_FVRH_Exterior_e1391182892802_325e660fdd",
+                "resource_type": "image"
+            }
+        }
+    },
+    "hash": "FVRH_Exterior_e1391182892802_325e660fdd",
+    "ext": ".jpeg",
+    "mime": "image/jpeg",
+    "size": 91.18,
+    "url": "https://res.cloudinary.com/maxii/image/upload/v1594183735/FVRH_Exterior_e1391182892802_325e660fdd.jpg",
+    "previewUrl": null,
+    "provider": "cloudinary",
+    "provider_metadata": {
+        "public_id": "FVRH_Exterior_e1391182892802_325e660fdd",
+        "resource_type": "image"
+    }
+}
