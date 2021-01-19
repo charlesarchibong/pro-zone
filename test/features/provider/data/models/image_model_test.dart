@@ -26,7 +26,7 @@ void main() {
         () {
       ImageModel imageModel = ImageModel.fromMap(
         json.decode(
-          fixture('image_model'),
+          fixture('image_fixture'),
         ),
       );
       print(imageModel.toJson());
