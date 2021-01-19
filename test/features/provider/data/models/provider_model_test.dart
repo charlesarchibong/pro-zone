@@ -59,6 +59,7 @@ main() {
           ),
         ),
       );
+      print(providerTypeModel.toJson());
       expect(providerTypeModel, equals(providerModelTest));
     });
 
