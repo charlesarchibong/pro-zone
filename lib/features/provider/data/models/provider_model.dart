@@ -25,7 +25,17 @@ class ProviderModel extends ProviderEntity {
     this.providerTypeModel,
     this.state,
     this.images,
-  });
+  }) : super(
+          address: address,
+          id: id,
+          name: name,
+          rating: rating,
+          activeStatus: activeStatus,
+          description: description,
+          images: images,
+          providerTypeEntity: providerTypeModel,
+          state: state,
+        );
 
   Map<String, dynamic> toMap() {
     return {
