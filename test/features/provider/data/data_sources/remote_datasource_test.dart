@@ -131,6 +131,42 @@ main() {
             ),
           ));
     });
+
+    // test('should upload provider images to the serser', () async {
+    //   when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    //   when(
+    //     mockHttpServerRequester.post(
+    //         url: UPLOAD_PROVIDER_IMAGES,
+    //         contentType: 'multipart/form-data',
+    //         body: FormData.fromMap({
+    //           "ref": "provider",
+    //           "refId": 'any',
+    //           "files": await getMultipartFromFiles([])
+    //         })),
+    //   ).thenAnswer(
+    //     (_) async => Response(
+    //       data: json.decode(
+    //         fixture(
+    //           'image_fixture',
+    //         ),
+    //       ),
+    //       statusCode: 200,
+    //     ),
+    //   );
+    //   final result = await remoteDataSourceImpl.uploadProviderImages(
+    //     images: [],
+    //     providerId: 'any',
+    //   );
+    //   expect(
+    //       result,
+    //       ImageModel.fromMap(
+    //         json.decode(
+    //           fixture(
+    //             'image_fixture',
+    //           ),
+    //         ),
+    //       ));
+    // });
   });
   group('states', () {
     test('should request list of states from server', () async {

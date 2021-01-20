@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
+import 'package:multi_image_picker/src/asset.dart';
 import 'package:prozone_app/core/errors/error.dart';
 import 'package:prozone_app/core/errors/failure.dart';
 import 'package:prozone_app/features/provider/data/data_sources/remote_datasource.dart';
 import 'package:prozone_app/features/provider/data/models/provider_model.dart';
+import 'package:prozone_app/features/provider/domain/entities/image_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_type_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/state_entity.dart';
@@ -97,6 +99,34 @@ class ProviderRepositoryImpl implements ProviderRepository {
         state: providerEntity.state,
       );
       return Right(await remoteDataSource.createProvider(providerModel));
+    } catch (e) {
+      print(e);
+      if (e is NoInternetException) {
+        return Left(
+          NoInternetFailure(),
+        );
+      }
+      if (e is DioError) {
+        return Left(
+          ServerFailure(
+            message: e.response.data['message'],
+          ),
+        );
+      }
+      return Left(UnknownFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ImageEntity>> uploadProviderImages(
+      {String providerId, List<Asset> images}) async {
+    try {
+      return Right(
+        await remoteDataSource.uploadProviderImages(
+          images: images,
+          providerId: providerId,
+        ),
+      );
     } catch (e) {
       print(e);
       if (e is NoInternetException) {
