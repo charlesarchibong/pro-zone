@@ -5,10 +5,10 @@ import 'package:prozone_app/core/errors/failure.dart';
 import 'package:prozone_app/features/provider/domain/entities/image_entity.dart';
 import 'package:prozone_app/features/provider/domain/repositories/provider_repository.dart';
 
-class UploadProviderImages {
+class UploadProviderImagesUsecase {
   final ProviderRepository providerRepository;
 
-  UploadProviderImages({
+  UploadProviderImagesUsecase({
     @required this.providerRepository,
   });
 

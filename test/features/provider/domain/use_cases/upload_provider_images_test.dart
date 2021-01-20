@@ -17,11 +17,11 @@ final ImageModel imageModel = ImageModel.fromMap(
   ),
 );
 main() {
-  UploadProviderImages uploadProviderImages;
+  UploadProviderImagesUsecase uploadProviderImages;
   MockProviderRepository mockProviderRepository;
   setUp(() {
     mockProviderRepository = MockProviderRepository();
-    uploadProviderImages = UploadProviderImages(
+    uploadProviderImages = UploadProviderImagesUsecase(
       providerRepository: mockProviderRepository,
     );
   });
