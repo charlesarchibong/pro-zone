@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:multi_image_picker/src/asset.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:prozone_app/core/errors/error.dart';
 import 'package:prozone_app/core/errors/failure.dart';
 import 'package:prozone_app/features/provider/data/data_sources/remote_datasource.dart';

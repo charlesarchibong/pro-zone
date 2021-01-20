@@ -25,6 +25,7 @@ class _ListProvidersPageState extends State<ListProvidersPage> {
     return Consumer<ServiceProvider>(
         builder: (context, serviceProvider, child) {
       return Scaffold(
+        backgroundColor: Color(0xffFAFAFA),
         appBar: AppBar(
           leading: Text(''),
           title: Text(
@@ -106,7 +107,9 @@ class _ListProvidersPageState extends State<ListProvidersPage> {
               ),
               Expanded(
                 child: serviceProvider.isHome
-                    ? ListProvidersWidget()
+                    ? ListProvidersWidget(
+                        serviceProvider: serviceProvider,
+                      )
                     : AddProviderWidget(),
               )
             ],

@@ -29,15 +29,20 @@ class ServiceProvider extends ChangeNotifier {
   List<ProviderEntity> _providers = List();
   List<ProviderEntity> get providers => _providers;
 
+  ValueNotifier<bool> _loading = ValueNotifier(false);
+  ValueNotifier<bool> get loading => _loading;
+
   void toggleHome() {
     _isHome = !_isHome;
     notifyListeners();
   }
 
   Future<Either<Failure, List<ProviderEntity>>> getProvidersList() async {
+    _loading.value = true;
     final providers = await getAllProvidersUsecase();
     providers.fold((l) => print(l), (r) => _providers = r);
     notifyListeners();
+    _loading.value = false;
     return providers;
   }
 }
