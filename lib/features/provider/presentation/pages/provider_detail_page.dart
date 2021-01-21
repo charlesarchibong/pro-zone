@@ -122,12 +122,32 @@ class _ProviderDetailPageState extends State<ProviderDetailPage> {
                 SizedBox(
                   height: 40,
                 ),
+                // buildGridView(),
               ],
             ),
           ),
         ),
       );
     });
+  }
+
+  Widget buildGridView() {
+    return Expanded(
+      child: GridView.count(
+        crossAxisCount: 3,
+        children: List.generate(widget.providerEntity.images.length, (index) {
+          String imageUrl = widget.providerEntity.images[index].mediumImage.url;
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Image.network(
+              imageUrl,
+              width: 300,
+              height: 300,
+            ),
+          );
+        }),
+      ),
+    );
   }
 
   Widget providerDetailWidget({String title, String text}) {
