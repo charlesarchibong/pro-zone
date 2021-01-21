@@ -109,7 +109,7 @@ class _EditProviderDetailsPageState extends State<EditProviderDetailsPage> {
                             return SmoothStarRating(
                               allowHalfRating: false,
                               onRated: (v) {
-                                print(v);
+                                //print(v);
                                 _rating.value = v;
                               },
                               starCount: 5,

@@ -20,11 +20,12 @@ class ProviderRepositoryImpl implements ProviderRepository {
     @required this.remoteDataSource,
   });
   @override
-  Future<Either<Failure, List<ProviderEntity>>> getProviders() async {
+  Future<Either<Failure, List<ProviderEntity>>> getProviders(
+      {String searchText}) async {
     try {
-      return Right(await remoteDataSource.getProviders());
+      return Right(await remoteDataSource.getProviders(searchText));
     } catch (e) {
-      print(e);
+      //print(e);
       if (e is NoInternetException) {
         return Left(
           NoInternetFailure(),
@@ -48,7 +49,7 @@ class ProviderRepositoryImpl implements ProviderRepository {
     try {
       return Right(await remoteDataSource.getStates());
     } catch (e) {
-      print(e);
+      //print(e);
       if (e is NoInternetException) {
         return Left(
           NoInternetFailure(),
@@ -72,7 +73,7 @@ class ProviderRepositoryImpl implements ProviderRepository {
     try {
       return Right(await remoteDataSource.getProviderTypes());
     } catch (e) {
-      print(e);
+      //print(e);
       if (e is NoInternetException) {
         return Left(
           NoInternetFailure(),
@@ -114,7 +115,7 @@ class ProviderRepositoryImpl implements ProviderRepository {
       );
       return Right(await remoteDataSource.createProvider(providerModel));
     } catch (e) {
-      print(e);
+      //print(e);
       if (e is NoInternetException) {
         return Left(
           NoInternetFailure(),
@@ -144,7 +145,7 @@ class ProviderRepositoryImpl implements ProviderRepository {
         ),
       );
     } catch (e) {
-      print(e);
+      //print(e);
       if (e is NoInternetException) {
         return Left(
           NoInternetFailure(),
@@ -186,7 +187,7 @@ class ProviderRepositoryImpl implements ProviderRepository {
       );
       return Right(await remoteDataSource.updateProvider(providerModel));
     } catch (e) {
-      print(e);
+      //print(e);
       if (e is NoInternetException) {
         return Left(
           NoInternetFailure(),

@@ -16,7 +16,7 @@ import 'package:prozone_app/features/provider/data/models/provider_type_model.da
 import 'package:prozone_app/features/provider/data/models/state_model.dart';
 
 abstract class RemoteDataSource {
-  Future<List<ProviderModel>> getProviders();
+  Future<List<ProviderModel>> getProviders([String searchText]);
   Future<List<StateModel>> getStates();
   Future<List<ProviderTypeModel>> getProviderTypes();
   Future<List<ImageModel>> uploadProviderImages({
@@ -37,10 +37,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   });
 
   @override
-  Future<List<ProviderModel>> getProviders() async {
+  Future<List<ProviderModel>> getProviders([String searchText]) async {
     if (await networkInfo.isConnected) {
+      //print(searchText);
       final response = await httpServiceRequester.getRequest(
         url: GET_PROVIDERS_ENDPOINT,
+        queryParam: searchText != null ? {'name_contains': searchText} : {},
       );
       return ProviderModelList.fromJson(response.data).list;
     } else {
@@ -90,7 +92,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<ImageModel>> uploadProviderImages(
       {String providerId, List<Asset> images}) async {
     if (await networkInfo.isConnected) {
-      print(images.length);
+      //print(images.length);
       List<File> fileImages = await getMultipartFromFiles(images);
       FormData formData = FormData();
       for (File file in fileImages) {
@@ -119,7 +121,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         ),
       ]);
 
-      // print(files.length);
+      ////print(files.length);
       final response = await httpServiceRequester.post(
         url: UPLOAD_PROVIDER_IMAGES,
         contentType: StringContentType.formData(),
@@ -160,6 +162,6 @@ Future<List<File>> getMultipartFromFiles(List<Asset> images) async {
     imageList.add(image);
   }
 
-  print(imageList.length);
+  //print(imageList.length);
   return imageList;
 }
