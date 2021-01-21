@@ -152,4 +152,44 @@ class ProviderRepositoryImpl implements ProviderRepository {
       return Left(UnknownFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, ProviderEntity>> updateProvider(
+      ProviderEntity providerEntity) async {
+    try {
+      ProviderModel providerModel = ProviderModel(
+        activeStatus: providerEntity.activeStatus,
+        address: providerEntity.address,
+        description: providerEntity.description,
+        id: providerEntity.id,
+        images: providerEntity.images,
+        name: providerEntity.name,
+        providerTypeModel: ProviderTypeModel(
+          id: providerEntity.providerTypeEntity.id,
+          name: providerEntity.providerTypeEntity.name,
+        ),
+        rating: providerEntity.rating,
+        state: StateModel(
+          id: providerEntity.state.id,
+          name: providerEntity.state.name,
+        ),
+      );
+      return Right(await remoteDataSource.updateProvider(providerModel));
+    } catch (e) {
+      print(e);
+      if (e is NoInternetException) {
+        return Left(
+          NoInternetFailure(),
+        );
+      }
+      if (e is DioError) {
+        return Left(
+          ServerFailure(
+            message: e.response.data['message'],
+          ),
+        );
+      }
+      return Left(UnknownFailure());
+    }
+  }
 }

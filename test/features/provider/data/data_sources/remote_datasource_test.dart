@@ -132,6 +132,36 @@ main() {
           ));
     });
 
+    test('should update provider information to the server', () async {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(
+        mockHttpServerRequester.put(
+          url: GET_PROVIDERS_ENDPOINT + '/${providerModel.id}',
+          contentType: 'application/json',
+          data: providerModel.toMap(),
+        ),
+      ).thenAnswer(
+        (_) async => Response(
+          data: json.decode(
+            fixture(
+              'provider_fixture',
+            ),
+          ),
+          statusCode: 200,
+        ),
+      );
+      final result = await remoteDataSourceImpl.updateProvider(providerModel);
+      expect(
+          result,
+          ProviderModel.fromMap(
+            json.decode(
+              fixture(
+                'provider_fixture',
+              ),
+            ),
+          ));
+    });
+
     // test('should upload provider images to the serser', () async {
     //   when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     //   when(

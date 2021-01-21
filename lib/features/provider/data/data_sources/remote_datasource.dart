@@ -23,6 +23,7 @@ abstract class RemoteDataSource {
     List<Asset> images,
   });
   Future<ProviderModel> createProvider(ProviderModel providerModel);
+  Future<ProviderModel> updateProvider(ProviderModel providerModel);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -98,6 +99,20 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         }),
       );
       return ImageModel.fromMap(response.data);
+    } else {
+      throw NoInternetException();
+    }
+  }
+
+  @override
+  Future<ProviderModel> updateProvider(ProviderModel providerModel) async {
+    if (await networkInfo.isConnected) {
+      final response = await httpServiceRequester.put(
+        url: GET_PROVIDERS_ENDPOINT + '/${providerModel.id}',
+        contentType: 'application/json',
+        data: providerModel.toMap(),
+      );
+      return ProviderModel.fromMap(response.data);
     } else {
       throw NoInternetException();
     }

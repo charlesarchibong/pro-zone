@@ -59,16 +59,11 @@ class HttpServiceRequester {
     dio.options.headers["Authorization"] = "Bearer ${env[AUTH_TOKEN]}";
     Options _cacheOptions = buildCacheOptions(
       Duration(
-        seconds: 10,
+        seconds: 40,
       ),
     );
 
     dio.interceptors.add(dioCacheManager.interceptor);
-    _cacheOptions = buildCacheOptions(
-      Duration(
-        minutes: 10,
-      ),
-    );
 
     Response response = await dio.get(
       url,
