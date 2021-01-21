@@ -14,6 +14,9 @@ abstract class ProviderRepository {
     @required String providerId,
     List<Asset> images,
   });
+  Future<Either<Failure, ProviderEntity>> updateProvider(
+    ProviderEntity providerEntity,
+  );
   Future<Either<Failure, List<ProviderTypeEntity>>> getProviderTypes();
   Future<Either<Failure, ProviderEntity>> createProvider(
     ProviderEntity providerEntity,
