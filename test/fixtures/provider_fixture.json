@@ -1,8 +1,35 @@
 {
-    "id": "123",
-    "name": "Charles Archibong",
-    "description": "I am a mobile developer",
+    "id": 2,
+    "name": "Reddington Hospital",
+    "description": "A Hospital that is red",
     "rating": 5,
-    "active_status": "Online",
-    "state" : {"id": "12","name": "Cross river"}
+    "address": "Somewhere in Lekki",
+    "active_status": "Active",
+    "provider_type": {
+        "id": 1,
+        "name": "Hospital"
+    },
+    "state": {
+        "id": 1,
+        "name": "Lagos"
+    },
+    "images": [
+        {
+            "id": 3,
+            "name": "hospital",
+            "alternativeText": "",
+            "caption": "",
+            "formats": {
+                "small": {
+                    "url": "https://res.cloudinary.com/maxii/image/upload/v1594453523/small_hospital_7507b92df8.jpg"
+                },
+                "medium": {
+                    "url": "https://res.cloudinary.com/maxii/image/upload/v1594453523/medium_hospital_7507b92df8.jpg"
+                },
+                "thumbnail": {
+                    "url": "https://res.cloudinary.com/maxii/image/upload/v1594453523/thumbnail_hospital_7507b92df8.jpg"
+                }
+            }
+        }
+    ]
 }

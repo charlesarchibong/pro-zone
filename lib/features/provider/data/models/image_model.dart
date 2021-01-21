@@ -62,3 +62,15 @@ class ImageModel extends ImageEntity {
   factory ImageModel.fromJson(String source) =>
       ImageModel.fromMap(json.decode(source));
 }
+
+class ImageModelList {
+  final List<ImageModel> list;
+
+  ImageModelList({this.list});
+
+  factory ImageModelList.fromJson(List parsedJson) {
+    List<ImageModel> list =
+        parsedJson.map((i) => ImageModel.fromMap(i)).toList();
+    return ImageModelList(list: list);
+  }
+}

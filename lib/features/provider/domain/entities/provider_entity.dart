@@ -16,7 +16,7 @@ class ProviderEntity extends Equatable {
   final List<ImageEntity> images;
 
   ProviderEntity({
-    @required this.id,
+    this.id,
     @required this.name,
     this.description,
     @required this.rating,

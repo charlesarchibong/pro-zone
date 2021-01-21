@@ -32,3 +32,15 @@ class StateModel extends StateEntity {
   factory StateModel.fromJson(String source) =>
       StateModel.fromMap(json.decode(source));
 }
+
+class StateModelList {
+  final List<StateModel> list;
+
+  StateModelList({this.list});
+
+  factory StateModelList.fromJson(List parsedJson) {
+    List<StateModel> list =
+        parsedJson.map((i) => StateModel.fromMap(i)).toList();
+    return StateModelList(list: list);
+  }
+}

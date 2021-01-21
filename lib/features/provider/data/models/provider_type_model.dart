@@ -32,3 +32,15 @@ class ProviderTypeModel extends ProviderTypeEntity {
   factory ProviderTypeModel.fromJson(String source) =>
       ProviderTypeModel.fromMap(json.decode(source));
 }
+
+class ProviderTypeModelList {
+  final List<ProviderTypeModel> list;
+
+  ProviderTypeModelList({this.list});
+
+  factory ProviderTypeModelList.fromJson(List parsedJson) {
+    List<ProviderTypeModel> list =
+        parsedJson.map((i) => ProviderTypeModel.fromMap(i)).toList();
+    return ProviderTypeModelList(list: list);
+  }
+}
