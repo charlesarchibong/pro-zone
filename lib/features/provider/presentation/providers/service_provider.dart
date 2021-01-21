@@ -5,6 +5,7 @@ import 'package:prozone_app/features/provider/domain/entities/provider_entity.da
 import 'package:prozone_app/features/provider/domain/entities/provider_type_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/state_entity.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/create_provider_usecase.dart';
+import 'package:prozone_app/features/provider/domain/use_cases/edit_provider_usecase.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/get_all_providers_usecase.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/get_provider_types_usecase.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/get_states_usecase.dart';
@@ -15,6 +16,7 @@ class ServiceProvider extends ChangeNotifier {
   final GetAllProvidersUsecase getAllProvidersUsecase;
   final GetProviderTypesUsecase getProviderTypesUsecase;
   final GetStatesUsecase getStatesUsecase;
+  final EditProviderUseCase editProviderUseCase;
   final UploadProviderImagesUsecase uploadProviderImagesUsecase;
 
   ServiceProvider({
@@ -23,6 +25,7 @@ class ServiceProvider extends ChangeNotifier {
     @required this.getProviderTypesUsecase,
     @required this.getStatesUsecase,
     @required this.uploadProviderImagesUsecase,
+    @required this.editProviderUseCase,
   });
 
   bool _isHome = true;
@@ -52,6 +55,14 @@ class ServiceProvider extends ChangeNotifier {
     notifyListeners();
     _loading.value = false;
     return providers;
+  }
+
+  Future<Either<Failure, ProviderEntity>> editProvider(
+      ProviderEntity providerEntity) async {
+    _loading.value = true;
+    final provider = await editProviderUseCase(providerEntity);
+    _loading.value = false;
+    return provider;
   }
 
   Future<Either<Failure, ProviderEntity>> addProvider(

@@ -35,7 +35,9 @@ class _EditProviderDetailsPageState extends State<EditProviderDetailsPage> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    if (mounted) {
+      _loadData();
+    }
   }
 
   @override
@@ -298,6 +300,7 @@ class _EditProviderDetailsPageState extends State<EditProviderDetailsPage> {
     }, (r) async {
       ProviderEntity providerEntity = ProviderEntity(
         address: _addressController.text,
+        id: widget.providerEntity.id,
         name: _nameController.text,
         rating: _rating.value.toInt(),
         activeStatus: _activeStatus.value,
@@ -306,7 +309,7 @@ class _EditProviderDetailsPageState extends State<EditProviderDetailsPage> {
         state: selectedStateEntity,
       );
       final added = await Provider.of<ServiceProvider>(context, listen: false)
-          .addProvider(providerEntity);
+          .editProvider(providerEntity);
       added.fold((l) {
         FlushBarNotification.showErrorMessage(
           context: context,

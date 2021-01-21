@@ -9,6 +9,7 @@ import 'package:prozone_app/features/provider/data/data_sources/remote_datasourc
 import 'package:prozone_app/features/provider/data/repositories/provider_repository_impl.dart';
 import 'package:prozone_app/features/provider/domain/repositories/provider_repository.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/create_provider_usecase.dart';
+import 'package:prozone_app/features/provider/domain/use_cases/edit_provider_usecase.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/get_all_providers_usecase.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/get_provider_types_usecase.dart';
 import 'package:prozone_app/features/provider/domain/use_cases/get_states_usecase.dart';
@@ -86,12 +87,18 @@ Future<void> initDi() async {
     ),
   );
   sl.registerLazySingleton(
+    () => EditProviderUseCase(
+      providerRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
     () => ServiceProvider(
       createProviderUseCase: sl(),
       getAllProvidersUsecase: sl(),
       getProviderTypesUsecase: sl(),
       getStatesUsecase: sl(),
       uploadProviderImagesUsecase: sl(),
+      editProviderUseCase: sl(),
     ),
   );
 }

@@ -34,7 +34,9 @@ class _AddProviderWidgetState extends State<AddProviderWidget> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    if (mounted) {
+      _loadData();
+    }
   }
 
   @override

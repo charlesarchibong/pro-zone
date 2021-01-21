@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:prozone_app/core/constants/endpoint_constants.dart';
 import 'package:prozone_app/core/constants/env_constant.dart';
 
 class HttpServiceRequester {
@@ -59,9 +60,15 @@ class HttpServiceRequester {
     dio.options.headers["Authorization"] = "Bearer ${env[AUTH_TOKEN]}";
     Options _cacheOptions = buildCacheOptions(
       Duration(
-        seconds: 40,
+        seconds: 1,
       ),
     );
+    if (url != GET_PROVIDERS_ENDPOINT)
+      _cacheOptions = buildCacheOptions(
+        Duration(
+          minutes: 20,
+        ),
+      );
 
     dio.interceptors.add(dioCacheManager.interceptor);
 
@@ -92,19 +99,20 @@ class HttpServiceRequester {
 
   Future<Response> put({
     @required String url,
-    Map headers,
     @required Map data,
     @required contentType,
   }) async {
     dio.options.headers["Authorization"] = "Bearer ${env[AUTH_TOKEN]}";
-
-    dio.options.headers = headers;
-    Response response = await dio.put(url,
-        data: data,
-        options: Options(
-          contentType: contentType,
-          headers: headers,
-        ));
+    Response response = await dio.put(
+      url,
+      data: data,
+      // queryParameters: queryParam,
+      options: Options(
+        contentType: contentType,
+        // headers: {headers,
+        // followRedirects: true,
+      ),
+    );
     return response;
   }
 }
