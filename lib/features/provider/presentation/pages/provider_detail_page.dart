@@ -46,8 +46,13 @@ class _ProviderDetailPageState extends State<ProviderDetailPage> {
         ),
       ],
       onSelected: (value) {
-        //TODO add edit provider details/add images functionalty
+        //TODO add upload images functionalty
         print(value);
+        Navigator.pushNamed(
+          context,
+          value,
+          arguments: widget.providerEntity,
+        );
       },
     );
 
