@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:prozone_app/core/errors/failure.dart';
+import 'package:prozone_app/features/provider/domain/entities/image_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_type_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/state_entity.dart';
@@ -43,9 +45,37 @@ class ServiceProvider extends ChangeNotifier {
   ValueNotifier<bool> _loading = ValueNotifier(false);
   ValueNotifier<bool> get loading => _loading;
 
+  List<Asset> _images = List<Asset>();
+  List<Asset> get images => _images;
+
   void toggleHome() {
     _isHome = !_isHome;
     notifyListeners();
+  }
+
+  Future<Either<Failure, List<Asset>>> loadAssets() async {
+    List<Asset> resultList = List<Asset>();
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 12,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "ProZone App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+      _images = resultList;
+      notifyListeners();
+      return Right(resultList);
+    } catch (e) {
+      return Left(UnknownFailure());
+    }
   }
 
   Future<Either<Failure, List<ProviderEntity>>> getProvidersList() async {
@@ -63,6 +93,18 @@ class ServiceProvider extends ChangeNotifier {
     final provider = await editProviderUseCase(providerEntity);
     _loading.value = false;
     return provider;
+  }
+
+  Future<Either<Failure, ImageEntity>> uploadProviderImage(
+    String providerId,
+  ) async {
+    _loading.value = true;
+    final uploaded = await uploadProviderImagesUsecase(
+      providerId,
+      _images,
+    );
+    _loading.value = false;
+    return uploaded;
   }
 
   Future<Either<Failure, ProviderEntity>> addProvider(
