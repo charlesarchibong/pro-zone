@@ -196,7 +196,7 @@ class _AddProviderWidgetState extends State<AddProviderWidget> {
                   SearchableDropdown<StateEntity>.single(
                     value: selectedStateEntity,
                     isExpanded: true,
-                    hint: Text('Select Provider Type'),
+                    hint: Text('Select Provider State'),
                     items:
                         widget.serviceProvider.states.map((StateEntity value) {
                       return new DropdownMenuItem<StateEntity>(
