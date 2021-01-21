@@ -7,17 +7,17 @@ Build a simple mobile application that will be used by a provider officer for ma
 
 # Simple UIs
 
-<img src="screenshots/1.png"/>
+<img src="screenshots/1.png"  width="300"/>
 
-<img src="screenshots/2.png"/>
+<img src="screenshots/2.png"  width="300"/>
 
-<img src="screenshots/3.png"/>
+<img src="screenshots/3.png" width="300"/>
 
-<img src="screenshots/4.png"/>
+<img src="screenshots/4.png"  width="300"/>
 
-<img src="screenshots/5.png"/>
+<img src="screenshots/5.png"  width="300"/>
 
-<img src="screenshots/5.png"/>
+<img src="screenshots/5.png"  width="300"/>
 
 
 

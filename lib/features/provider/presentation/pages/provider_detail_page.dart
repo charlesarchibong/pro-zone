@@ -108,7 +108,9 @@ class _ProviderDetailPageState extends State<ProviderDetailPage> {
                   allowHalfRating: false,
                   onRated: (v) {},
                   starCount: 5,
-                  rating: widget.providerEntity.rating.toDouble(),
+                  rating: widget.providerEntity.rating == null
+                      ? 0.0
+                      : widget.providerEntity.rating.toDouble(),
                   size: 30.0,
                   isReadOnly: true,
                   color: Colors.green,

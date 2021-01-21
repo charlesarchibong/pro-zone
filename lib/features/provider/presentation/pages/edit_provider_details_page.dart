@@ -331,7 +331,9 @@ class _EditProviderDetailsPageState extends State<EditProviderDetailsPage> {
     _descriptionController.text = widget.providerEntity.description;
     _addressController.text = widget.providerEntity.address;
     _activeStatus.value = widget.providerEntity.activeStatus;
-    _rating.value = widget.providerEntity.rating.toDouble();
+    _rating.value = widget.providerEntity.rating == null
+        ? 0.0
+        : widget.providerEntity.rating.toDouble();
     selectedProviderType = widget.providerEntity.providerTypeEntity;
     selectedStateEntity = widget.providerEntity.state;
 
