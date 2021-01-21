@@ -32,9 +32,11 @@ class ProviderRepositoryImpl implements ProviderRepository {
       }
       if (e is DioError) {
         return Left(
-          ServerFailure(
-            message: e.response.data['message'],
-          ),
+          e.response == null
+              ? ServerFailure(message: e.message)
+              : ServerFailure(
+                  message: e.response.data['message'] ?? 'Error occurred',
+                ),
         );
       }
       return Left(UnknownFailure());
@@ -54,9 +56,11 @@ class ProviderRepositoryImpl implements ProviderRepository {
       }
       if (e is DioError) {
         return Left(
-          ServerFailure(
-            message: e.response.data['message'],
-          ),
+          e.response == null
+              ? ServerFailure(message: e.message)
+              : ServerFailure(
+                  message: e.response.data['message'] ?? 'Error occurred',
+                ),
         );
       }
       return Left(UnknownFailure());
@@ -76,9 +80,11 @@ class ProviderRepositoryImpl implements ProviderRepository {
       }
       if (e is DioError) {
         return Left(
-          ServerFailure(
-            message: e.response.data['message'],
-          ),
+          e.response == null
+              ? ServerFailure(message: e.message)
+              : ServerFailure(
+                  message: e.response.data['message'] ?? 'Error occurred',
+                ),
         );
       }
       return Left(UnknownFailure());
@@ -116,9 +122,11 @@ class ProviderRepositoryImpl implements ProviderRepository {
       }
       if (e is DioError) {
         return Left(
-          ServerFailure(
-            message: e.response.data['message'],
-          ),
+          e.response == null
+              ? ServerFailure(message: e.message)
+              : ServerFailure(
+                  message: e.response.data['message'] ?? 'Error occurred',
+                ),
         );
       }
       return Left(UnknownFailure());
@@ -126,7 +134,7 @@ class ProviderRepositoryImpl implements ProviderRepository {
   }
 
   @override
-  Future<Either<Failure, ImageEntity>> uploadProviderImages(
+  Future<Either<Failure, List<ImageEntity>>> uploadProviderImages(
       {String providerId, List<Asset> images}) async {
     try {
       return Right(
@@ -144,9 +152,11 @@ class ProviderRepositoryImpl implements ProviderRepository {
       }
       if (e is DioError) {
         return Left(
-          ServerFailure(
-            message: e.response.data['message'],
-          ),
+          e.response == null
+              ? ServerFailure(message: e.message)
+              : ServerFailure(
+                  message: e.response.data['message'] ?? 'Error occurred',
+                ),
         );
       }
       return Left(UnknownFailure());
@@ -184,9 +194,11 @@ class ProviderRepositoryImpl implements ProviderRepository {
       }
       if (e is DioError) {
         return Left(
-          ServerFailure(
-            message: e.response.data['message'],
-          ),
+          e.response == null
+              ? ServerFailure(message: e.message)
+              : ServerFailure(
+                  message: e.response.data['message'] ?? 'Error occurred',
+                ),
         );
       }
       return Left(UnknownFailure());

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:prozone_app/core/constants/content_type.dart';
 import 'package:prozone_app/core/constants/endpoint_constants.dart';
 import 'package:prozone_app/core/errors/error.dart';
 import 'package:prozone_app/core/network/http_requester.dart';
@@ -18,7 +19,7 @@ abstract class RemoteDataSource {
   Future<List<ProviderModel>> getProviders();
   Future<List<StateModel>> getStates();
   Future<List<ProviderTypeModel>> getProviderTypes();
-  Future<ImageModel> uploadProviderImages({
+  Future<List<ImageModel>> uploadProviderImages({
     String providerId,
     List<Asset> images,
   });
@@ -76,7 +77,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     if (await networkInfo.isConnected) {
       final response = await httpServiceRequester.post(
         url: GET_PROVIDERS_ENDPOINT,
-        contentType: 'application/json',
+        contentType: StringContentType.json(),
         body: providerModel.toMap(),
       );
       return ProviderModel.fromMap(response.data);
@@ -86,19 +87,45 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<ImageModel> uploadProviderImages(
+  Future<List<ImageModel>> uploadProviderImages(
       {String providerId, List<Asset> images}) async {
     if (await networkInfo.isConnected) {
+      print(images.length);
+      List<File> fileImages = await getMultipartFromFiles(images);
+      FormData formData = FormData();
+      for (File file in fileImages) {
+        formData.files.add(
+          MapEntry(
+            "files",
+            MultipartFile.fromFileSync(
+              file.path,
+              filename: file.path.split('/').last,
+            ),
+          ),
+        );
+      }
+      formData.fields.addAll([
+        MapEntry(
+          "ref",
+          "provider",
+        ),
+        MapEntry(
+          "refId",
+          providerId,
+        ),
+        MapEntry(
+          "field",
+          "images",
+        ),
+      ]);
+
+      // print(files.length);
       final response = await httpServiceRequester.post(
         url: UPLOAD_PROVIDER_IMAGES,
-        contentType: 'multipart/form-data',
-        body: FormData.fromMap({
-          "ref": "provider",
-          "refId": providerId,
-          "files": await getMultipartFromFiles(images)
-        }),
+        contentType: StringContentType.formData(),
+        body: formData,
       );
-      return ImageModel.fromMap(response.data);
+      return ImageModelList.fromJson(response.data).list;
     } else {
       throw NoInternetException();
     }
@@ -109,7 +136,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     if (await networkInfo.isConnected) {
       final response = await httpServiceRequester.put(
         url: GET_PROVIDERS_ENDPOINT + '/${providerModel.id}',
-        contentType: 'application/json',
+        contentType: StringContentType.json(),
         data: providerModel.toMap(),
       );
       return ProviderModel.fromMap(response.data);
@@ -119,19 +146,20 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 }
 
-Future<List<MultipartFile>> getMultipartFromFiles(List<Asset> images) async {
-  List<MultipartFile> imageList = List();
-  images.forEach((e) async {
-    ByteData data = await e.getByteData(quality: 100);
+Future<List<File>> getMultipartFromFiles(List<Asset> images) async {
+  List<File> imageList = List();
+  for (var i = 0; i < images.length; i++) {
+    ByteData data = await images[i].getByteData(quality: 100);
     final buffer = data.buffer;
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
-    var filePath = tempPath +
-        '/${e.name}.tmp'; // file_01.tmp is dump file, can be anything
+    var filePath = tempPath + '/${images[i].name}';
     File image = await File(filePath).writeAsBytes(
-        buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+      buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+    );
+    imageList.add(image);
+  }
 
-    imageList.add(await MultipartFile.fromFile(image.path));
-  });
+  print(imageList.length);
   return imageList;
 }

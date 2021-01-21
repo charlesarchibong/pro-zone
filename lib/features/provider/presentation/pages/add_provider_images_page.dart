@@ -60,16 +60,25 @@ class _AddProviderImagePageState extends State<AddProviderImagePage> {
                         height: 10,
                       ),
                       CustomButtonWidget(
-                        buttonText: serviceProvider.images.length > 0
-                            ? 'Submit'
-                            : 'Select Photos',
+                        buttonText: 'Select Photos',
                         onTap: loading
                             ? null
                             : () {
-                                serviceProvider.images.length > 0
-                                    ? _submit()
-                                    : _loadAssets();
+                                _loadAssets();
                               },
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomButtonWidget(
+                        buttonText: loading ? 'Loading' : 'Submit',
+                        onTap: loading
+                            ? null
+                            : serviceProvider.images.length > 0
+                                ? () {
+                                    _submit();
+                                  }
+                                : null,
                       ),
                       SizedBox(
                         height: 70,
@@ -132,7 +141,7 @@ class _AddProviderImagePageState extends State<AddProviderImagePage> {
     }, (r) {
       FlushBarNotification.showSuccessMessage(
         context: context,
-        message: 'Provider was added successfully',
+        message: 'Provider images was added successfully',
         title: "Success",
       );
     });

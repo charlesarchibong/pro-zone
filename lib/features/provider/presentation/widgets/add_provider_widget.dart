@@ -224,7 +224,7 @@ class _AddProviderWidgetState extends State<AddProviderWidget> {
                   height: 20,
                 ),
                 CustomButtonWidget(
-                  buttonText: 'Submit',
+                  buttonText: loading ? 'Loading' : 'Submit',
                   onTap: loading
                       ? null
                       : () {

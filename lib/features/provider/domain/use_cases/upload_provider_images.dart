@@ -12,7 +12,7 @@ class UploadProviderImagesUsecase {
     @required this.providerRepository,
   });
 
-  Future<Either<Failure, ImageEntity>> call(
+  Future<Either<Failure, List<ImageEntity>>> call(
       String providerId, List<Asset> images) {
     return providerRepository.uploadProviderImages(
       providerId: providerId,

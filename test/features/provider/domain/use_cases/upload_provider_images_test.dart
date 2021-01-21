@@ -30,7 +30,7 @@ main() {
     when(mockProviderRepository
         .uploadProviderImages(providerId: '1', images: [])).thenAnswer(
       (_) async => Right(
-        imageModel,
+        [imageModel],
       ),
     );
     final result = await uploadProviderImages('1', []);

@@ -10,7 +10,7 @@ import 'package:prozone_app/features/provider/domain/entities/state_entity.dart'
 abstract class ProviderRepository {
   Future<Either<Failure, List<ProviderEntity>>> getProviders();
   Future<Either<Failure, List<StateEntity>>> getStates();
-  Future<Either<Failure, ImageEntity>> uploadProviderImages({
+  Future<Either<Failure, List<ImageEntity>>> uploadProviderImages({
     @required String providerId,
     List<Asset> images,
   });

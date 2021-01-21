@@ -95,7 +95,7 @@ class ServiceProvider extends ChangeNotifier {
     return provider;
   }
 
-  Future<Either<Failure, ImageEntity>> uploadProviderImage(
+  Future<Either<Failure, List<ImageEntity>>> uploadProviderImage(
     String providerId,
   ) async {
     _loading.value = true;
@@ -117,11 +117,11 @@ class ServiceProvider extends ChangeNotifier {
 
   Future<Either<Failure, List<ProviderTypeEntity>>>
       getProviderTypeList() async {
-    _loading.value = true;
+    // _loading.value = true;
     final providerTypes = await getProviderTypesUsecase();
     providerTypes.fold((l) => print(l), (r) => _providerTypes = r);
     notifyListeners();
-    _loading.value = false;
+    // _loading.value = false;
     return providerTypes;
   }
 
@@ -171,11 +171,11 @@ class ServiceProvider extends ChangeNotifier {
   }
 
   Future<Either<Failure, List<StateEntity>>> getStateList() async {
-    _loading.value = true;
+    // _loading.value = true;
     final states = await getStatesUsecase();
     states.fold((l) => print(l), (r) => _states = r);
     notifyListeners();
-    _loading.value = false;
+    // _loading.value = false;
     return states;
   }
 }
