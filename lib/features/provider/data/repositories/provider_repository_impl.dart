@@ -6,6 +6,8 @@ import 'package:prozone_app/core/errors/error.dart';
 import 'package:prozone_app/core/errors/failure.dart';
 import 'package:prozone_app/features/provider/data/data_sources/remote_datasource.dart';
 import 'package:prozone_app/features/provider/data/models/provider_model.dart';
+import 'package:prozone_app/features/provider/data/models/provider_type_model.dart';
+import 'package:prozone_app/features/provider/data/models/state_model.dart';
 import 'package:prozone_app/features/provider/domain/entities/image_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_entity.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_type_entity.dart';
@@ -94,9 +96,15 @@ class ProviderRepositoryImpl implements ProviderRepository {
         id: providerEntity.id,
         images: providerEntity.images,
         name: providerEntity.name,
-        providerTypeModel: providerEntity.providerTypeEntity,
+        providerTypeModel: ProviderTypeModel(
+          id: providerEntity.providerTypeEntity.id,
+          name: providerEntity.providerTypeEntity.name,
+        ),
         rating: providerEntity.rating,
-        state: providerEntity.state,
+        state: StateModel(
+          id: providerEntity.state.id,
+          name: providerEntity.state.name,
+        ),
       );
       return Right(await remoteDataSource.createProvider(providerModel));
     } catch (e) {

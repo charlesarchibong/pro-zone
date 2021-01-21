@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:prozone_app/core/constants/route_names.dart';
 import 'package:prozone_app/core/errors/failure.dart';
 import 'package:prozone_app/core/notice/flush_bar_notice.dart';
 import 'package:prozone_app/features/provider/domain/entities/provider_entity.dart';
@@ -69,53 +70,62 @@ class _ListProvidersWidgetState extends State<ListProvidersWidget> {
   }
 
   Widget providerDetailWidget(ProviderEntity providerEntity) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 10.0,
-      ),
-      child: Container(
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(15),
-          ),
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          VIEW_PROVIDER_DETAIL_PAGE,
+          arguments: providerEntity,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 10.0,
         ),
-        child: ListTile(
-          title: Text(
-            '${providerEntity.name}',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+        child: Container(
+          height: 80,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
             ),
           ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${providerEntity.description}',
-                style: TextStyle(),
+          child: ListTile(
+            title: Text(
+              '${providerEntity.name}',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              SmoothStarRating(
-                allowHalfRating: false,
-                onRated: (v) {},
-                starCount: 5,
-                rating: providerEntity.rating.toDouble(),
-                size: 12.0,
-                isReadOnly: true,
-                color: Colors.green,
-                borderColor: Colors.green,
-                spacing: 0.0,
-              )
-            ],
-          ),
-          trailing: Text(
-            '${providerEntity.activeStatus}',
-            style: TextStyle(
-              fontSize: 12,
-              color: providerEntity.activeStatus == 'Active'
-                  ? Theme.of(context).primaryColor
-                  : Colors.yellow[800],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${providerEntity.description}',
+                  style: TextStyle(),
+                ),
+                SmoothStarRating(
+                  allowHalfRating: false,
+                  onRated: (v) {},
+                  starCount: 5,
+                  rating: providerEntity.rating.toDouble(),
+                  size: 12.0,
+                  isReadOnly: true,
+                  color: Colors.green,
+                  borderColor: Colors.green,
+                  spacing: 0.0,
+                )
+              ],
+            ),
+            trailing: Text(
+              '${providerEntity.activeStatus}',
+              style: TextStyle(
+                fontSize: 12,
+                color: providerEntity.activeStatus == 'Active'
+                    ? Theme.of(context).primaryColor
+                    : Colors.yellow[800],
+              ),
             ),
           ),
         ),

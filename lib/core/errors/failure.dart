@@ -20,6 +20,16 @@ class ServerFailure extends Failure {
   List<Object> get props => [message];
 }
 
+class FormValidationFailure extends Failure {
+  final String message;
+  FormValidationFailure({
+    @required this.message,
+  });
+
+  @override
+  List<Object> get props => [message];
+}
+
 class CacheFailure extends Failure {
   @override
   List<Object> get props => [];
@@ -44,6 +54,8 @@ class FailureToMessage {
       message = failure.message;
     } else if (failure is CacheFailure) {
       message = 'Entity no found, please try again';
+    } else if (failure is FormValidationFailure) {
+      message = failure.message;
     }
     return message;
   }

@@ -110,7 +110,9 @@ class _ListProvidersPageState extends State<ListProvidersPage> {
                     ? ListProvidersWidget(
                         serviceProvider: serviceProvider,
                       )
-                    : AddProviderWidget(),
+                    : AddProviderWidget(
+                        serviceProvider: serviceProvider,
+                      ),
               )
             ],
           ),

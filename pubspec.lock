@@ -513,6 +513,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
+  searchable_dropdown:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: bad9412c3c27d007ca901813138bbd7cfb4cc90b
+      url: "https://github.com/matheusfajardo/searchable_dropdown"
+    source: git
+    version: "1.1.4"
   shared_preferences:
     dependency: "direct main"
     description:

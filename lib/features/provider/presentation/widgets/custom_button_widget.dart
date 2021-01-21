@@ -24,7 +24,7 @@ class _CustomButtonWidgetState extends State<CustomButtonWidget> {
         decoration: BoxDecoration(
           color: widget.onTap != null
               ? Theme.of(context).primaryColor
-              : Color.fromRGBO(7, 45, 114, 0.5),
+              : Color.fromRGBO(16, 145, 29, 0.5),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
