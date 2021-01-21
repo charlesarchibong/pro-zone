@@ -37,7 +37,7 @@ class _ViewProviderImagesPageState extends State<ViewProviderImagesPage> {
                           widget.providerEntity.images.length, (index) {
                         String assetUrl =
                             widget.providerEntity.images[index].smallImage.url;
-                        print(assetUrl);
+                        //print(assetUrl);
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Image.network(

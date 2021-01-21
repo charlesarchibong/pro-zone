@@ -29,7 +29,7 @@ void main() {
           fixture('image_fixture'),
         ),
       );
-      print(imageModel.toJson());
+      //print(imageModel.toJson());
       expect(
         imageModel,
         isA<ImageModel>(),

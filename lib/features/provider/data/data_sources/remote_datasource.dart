@@ -39,7 +39,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<List<ProviderModel>> getProviders([String searchText]) async {
     if (await networkInfo.isConnected) {
-      print(searchText);
+      //print(searchText);
       final response = await httpServiceRequester.getRequest(
         url: GET_PROVIDERS_ENDPOINT,
         queryParam: searchText != null ? {'name_contains': searchText} : {},
@@ -92,7 +92,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<List<ImageModel>> uploadProviderImages(
       {String providerId, List<Asset> images}) async {
     if (await networkInfo.isConnected) {
-      print(images.length);
+      //print(images.length);
       List<File> fileImages = await getMultipartFromFiles(images);
       FormData formData = FormData();
       for (File file in fileImages) {
@@ -121,7 +121,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         ),
       ]);
 
-      // print(files.length);
+      ////print(files.length);
       final response = await httpServiceRequester.post(
         url: UPLOAD_PROVIDER_IMAGES,
         contentType: StringContentType.formData(),
@@ -162,6 +162,6 @@ Future<List<File>> getMultipartFromFiles(List<Asset> images) async {
     imageList.add(image);
   }
 
-  print(imageList.length);
+  //print(imageList.length);
   return imageList;
 }
