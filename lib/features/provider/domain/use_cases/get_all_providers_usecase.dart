@@ -11,7 +11,9 @@ class GetAllProvidersUsecase {
     @required this.providerRepository,
   });
 
-  Future<Either<Failure, List<ProviderEntity>>> call() {
-    return providerRepository.getProviders();
+  Future<Either<Failure, List<ProviderEntity>>> call([String searchText]) {
+    return providerRepository.getProviders(
+      searchText: searchText,
+    );
   }
 }

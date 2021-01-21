@@ -20,9 +20,10 @@ class ProviderRepositoryImpl implements ProviderRepository {
     @required this.remoteDataSource,
   });
   @override
-  Future<Either<Failure, List<ProviderEntity>>> getProviders() async {
+  Future<Either<Failure, List<ProviderEntity>>> getProviders(
+      {String searchText}) async {
     try {
-      return Right(await remoteDataSource.getProviders());
+      return Right(await remoteDataSource.getProviders(searchText));
     } catch (e) {
       print(e);
       if (e is NoInternetException) {

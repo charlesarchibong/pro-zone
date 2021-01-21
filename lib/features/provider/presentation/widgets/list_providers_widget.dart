@@ -167,31 +167,35 @@ class _ListProvidersWidgetState extends State<ListProvidersWidget> {
                     ),
                   ),
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Search providers eg name/location',
-                      hintStyle: TextStyle(
-                        color: Color(0xff5F738C),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        height: 1.5,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Color(0xff7F91A8),
-                        size: 25,
-                      )
-                      // focusColor: Color(0xFFE5FFEA),
-                      // focusedBorder: InputBorder(borderSide: ),
-                      ),
+                    border: InputBorder.none,
+                    hintText: 'Search providers eg Charles',
+                    hintStyle: TextStyle(
+                      color: Color(0xff5F738C),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      height: 1.5,
+                    ),
+                    contentPadding: EdgeInsets.only(left: 20),
+                    // prefixIcon: SizedBox(
+                    //   width: 2,
+                    // )
+                    // focusColor: Color(0xFFE5FFEA),
+                    // focusedBorder: InputBorder(borderSide: ),
+                  ),
                 ),
               ),
             ),
             IconButton(
               icon: Icon(
-                Icons.sort,
+                Icons.search,
                 color: Theme.of(context).primaryColor,
+                size: 30.0,
               ),
-              onPressed: null,
+              onPressed: () {
+                _getProvider(
+                  _searchController.text,
+                );
+              },
             )
           ],
         ),
@@ -199,9 +203,9 @@ class _ListProvidersWidgetState extends State<ListProvidersWidget> {
     );
   }
 
-  void _getProvider() async {
+  void _getProvider([String searchText]) async {
     final providers = await Provider.of<ServiceProvider>(context, listen: false)
-        .getProvidersList();
+        .getProvidersList(searchText);
     providers.fold((l) {
       FlushBarNotification.showErrorMessage(
         context: context,

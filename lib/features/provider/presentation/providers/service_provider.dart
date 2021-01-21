@@ -78,9 +78,10 @@ class ServiceProvider extends ChangeNotifier {
     }
   }
 
-  Future<Either<Failure, List<ProviderEntity>>> getProvidersList() async {
+  Future<Either<Failure, List<ProviderEntity>>> getProvidersList(
+      [String searchText]) async {
     _loading.value = true;
-    final providers = await getAllProvidersUsecase();
+    final providers = await getAllProvidersUsecase(searchText);
     providers.fold((l) => print(l), (r) => _providers = r);
     notifyListeners();
     _loading.value = false;

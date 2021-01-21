@@ -55,7 +55,7 @@ class HttpServiceRequester {
 
   Future<Response> getRequest({
     @required String url,
-    // Map queryParam,
+    Map<String, dynamic> queryParam,
   }) async {
     dio.options.headers["Authorization"] = "Bearer ${env[AUTH_TOKEN]}";
     Options _cacheOptions = buildCacheOptions(
@@ -75,6 +75,7 @@ class HttpServiceRequester {
     Response response = await dio.get(
       url,
       options: _cacheOptions,
+      queryParameters: queryParam,
     );
     return response;
   }

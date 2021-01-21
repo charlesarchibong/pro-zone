@@ -16,7 +16,7 @@ import 'package:prozone_app/features/provider/data/models/provider_type_model.da
 import 'package:prozone_app/features/provider/data/models/state_model.dart';
 
 abstract class RemoteDataSource {
-  Future<List<ProviderModel>> getProviders();
+  Future<List<ProviderModel>> getProviders([String searchText]);
   Future<List<StateModel>> getStates();
   Future<List<ProviderTypeModel>> getProviderTypes();
   Future<List<ImageModel>> uploadProviderImages({
@@ -37,10 +37,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   });
 
   @override
-  Future<List<ProviderModel>> getProviders() async {
+  Future<List<ProviderModel>> getProviders([String searchText]) async {
     if (await networkInfo.isConnected) {
+      print(searchText);
       final response = await httpServiceRequester.getRequest(
         url: GET_PROVIDERS_ENDPOINT,
+        queryParam: searchText != null ? {'name_contains': searchText} : {},
       );
       return ProviderModelList.fromJson(response.data).list;
     } else {
