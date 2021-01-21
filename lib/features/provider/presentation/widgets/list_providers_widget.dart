@@ -109,7 +109,9 @@ class _ListProvidersWidgetState extends State<ListProvidersWidget> {
                   allowHalfRating: false,
                   onRated: (v) {},
                   starCount: 5,
-                  rating: providerEntity.rating.toDouble(),
+                  rating: providerEntity.rating == null
+                      ? 0.0
+                      : providerEntity.rating.toDouble(),
                   size: 12.0,
                   isReadOnly: true,
                   color: Colors.green,
