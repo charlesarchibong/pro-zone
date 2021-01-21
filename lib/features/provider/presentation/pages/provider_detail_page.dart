@@ -44,10 +44,12 @@ class _ProviderDetailPageState extends State<ProviderDetailPage> {
           child: const Text('Edit Provider Details'),
           value: EDIT_PROVIDER_DETAILS_PAGE,
         ),
+        new PopupMenuItem<String>(
+          child: const Text('View Provider Images'),
+          value: VIEW_PROVIDER_IMAGE_PAGE,
+        ),
       ],
       onSelected: (value) {
-        //TODO add upload images functionalty
-        print(value);
         Navigator.pushNamed(
           context,
           value,

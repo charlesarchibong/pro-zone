@@ -4,6 +4,7 @@ import 'package:prozone_app/features/provider/presentation/pages/add_provider_im
 import 'package:prozone_app/features/provider/presentation/pages/edit_provider_details_page.dart';
 import 'package:prozone_app/features/provider/presentation/pages/list_providers_page.dart';
 import 'package:prozone_app/features/provider/presentation/pages/provider_detail_page.dart';
+import 'package:prozone_app/features/provider/presentation/pages/view_provider_image_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -17,6 +18,12 @@ class RouteGenerator {
       case EDIT_PROVIDER_DETAILS_PAGE:
         return MaterialPageRoute(
           builder: (_) => EditProviderDetailsPage(
+            providerEntity: settings.arguments,
+          ),
+        );
+      case VIEW_PROVIDER_IMAGE_PAGE:
+        return MaterialPageRoute(
+          builder: (_) => ViewProviderImagesPage(
             providerEntity: settings.arguments,
           ),
         );

@@ -11,13 +11,16 @@ Build a simple mobile application that will be used by a provider officer for ma
 
 <img src="screenshots/2.png"  width="300"/>
 
-<img src="screenshots/3.png" width="300"/>
+<img src="screenshots/3.png"  width="300"/>
 
 <img src="screenshots/4.png"  width="300"/>
 
 <img src="screenshots/5.png"  width="300"/>
 
 <img src="screenshots/6.png"  width="300"/>
+
+<img src="screenshots/7.png"  width="300"/>
+
 
 
 
